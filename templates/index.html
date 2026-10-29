@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi-Posture Minibot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap"
+        rel="stylesheet">
+
+<body>
+
+    <div class="app-container">
+
+        <div class="sidebar">
+            <div class="bot-header">
+                <div class="bot-icon">
+                    <img src="/static/images/bot_icon.png" alt="bot icon">
+                </div>
+                <h2>PiPosture Bot</h2>
+                <p>Status: <span id="sys-status" class="status-ok">ONLINE</span></p>
+            </div>
+
+            <div class="controls-row">
+
+                <div class="control-item">
+                    <span class="mini-label">Camera</span>
+                    <label class="switch">
+                        <input type="checkbox" id="cam-toggle" onchange="toggleCamera()">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="control-item">
+                    <span id="voice-status" class="mini-label">Voice ON</span>
+                    <label class="switch">
+                        <input type="checkbox" id="voice-toggle" onclick="toggleVoice()" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+            </div>
+            <div class="menu">
+                <h3>Select Exercise</h3>
+                <button onclick="selectExercise('side_bend')" class="btn">Side Bend</button>
+                <button onclick="selectExercise('high_knees')" class="btn">High Knees</button>
+                <button onclick="selectExercise('cross_crunch')" class="btn">Cross Crunch</button>
+                <button onclick="selectExercise('good_morning')" class="btn">Good Morning</button>
+                <button onclick="selectExercise('overhead_reach')" class="btn">Overhead Reach</button>
+                <button onclick="selectExercise('None')" class="btn stop">End Session</button>
+            </div>
+        </div>
+
+        <div class="main-display">
+            <div class="video-frame">
+                <img id="processed-feed" src="/static/images/placeholder_cam.jpg" alt="Waiting for camera..."
+                    class="live-feed">
+
+                <video id="webcam-video" style="display:none;" autoplay playsinline></video>
+                <canvas id="webcam-canvas" style="display:none;"></canvas>
+
+                <div class="hud-overlay">
+                    <div class="rep-counter-box">
+                        <span class="hud-label">REPS</span>
+                        <span id="rep-count">0</span>
+                    </div>
+                    <div id="feedback-message" class="feedback-box">
+                        System on Standby
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-panel" id="guide-panel">
+            <div class="guide-content">
+                <h3>Exercise Guide</h3>
+                <h2 id="guide-title">Select an Exercise</h2>
+                <div class="image-container">
+                    <img id="guide-image" src="" alt="Exercise Preview">
+                </div>
+                <div class="bot-message">
+                    <span class="bot-prefix">PiPosture Bot:</span>
+                    <span id="bot-speech">Please select an exercise from the left menu to view instructions.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
